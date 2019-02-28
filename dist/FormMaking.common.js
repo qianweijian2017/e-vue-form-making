@@ -41900,7 +41900,7 @@ module.exports = function(n) {
               default:
                   e
               }
-          }
+          } 
           t.__esModule = !0,
           t.StatisticsLogger = void 0;
           var o = r(n(36)),
@@ -41919,11 +41919,10 @@ module.exports = function(n) {
               },
               e.prototype.send = function(e, t) {
 
-
+ 
                   var n = (0, a.createXHR)(),
                   r = 0;
-                  console.log( this)
-
+ 
                   n.open("POST", "https://uplog.qbox.me/log/3"),
                   n.setRequestHeader("Content-type", "application/x-www-form-urlencoded"),
                   n.setRequestHeader("Authorization", "UpToken " + t),
@@ -46189,8 +46188,8 @@ module.exports = function(n) {
                   this.$refs.uploadInput.value = []
               },
               uplaodAction: function(e, t, n) {
-                console.log('uplaodAction')
-                  var r = this,
+
+                var r = this,
                   o = (this.fileList.findIndex(function(e) {
                       return e.key === n
                   }), new XMLHttpRequest),
@@ -46202,6 +46201,7 @@ module.exports = function(n) {
                   o.onreadystatechange = function() {
                       if (4 === o.readyState) {
                           var e = JSON.parse(o.response);
+                          console.log(e)
                           e ? (r.$set(r.fileList, r.fileList.findIndex(function(e) {
                               return e.key === n
                           }), f({},
@@ -46240,8 +46240,7 @@ module.exports = function(n) {
                   }
               },
               uplaodAction2: function(e, t, n) {
-                console.log('uplaodAction2')
-
+ 
                   var r = this;
                   ke.upload(t, n, this.token, {
                       fname: n,
