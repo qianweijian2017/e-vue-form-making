@@ -48307,7 +48307,9 @@ module.exports = function(n) {
                   return ! 0
               },
               handlePreview: function() {
+ 
                   this.previewVisible = !0
+
               },
               setFormDefault:function setFormDefault(item,isTrue){
 
@@ -48368,12 +48370,10 @@ module.exports = function(n) {
 
 
               },
-              handleGenerateCode: function() {
+              handleGenerateCode: function(isParent) {
                   this.codeVisible = !0,
-                  this.htmlTemplate = et(JSON.stringify(this.widgetForm)),
-
-
- 
+                  this.htmlTemplate = et(JSON.stringify(this.widgetForm));
+                 
                   this.$nextTick(function() {
                       ace.edit("codeeditor").session.setMode("ace/mode/html")
                   })
