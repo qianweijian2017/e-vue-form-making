@@ -44256,6 +44256,10 @@ module.exports = function(n) {
           },
           r._l(r.data.columns,
           function(t, n) {
+
+            console.log(t)
+            console.log(n)
+
               return o("li", {
                   key: n
               },
@@ -44467,10 +44471,13 @@ module.exports = function(n) {
             model: {
                 value: r.data.options.formdefault,
                 callback: function(e) {
+                    
+                    // console.log(e)
+                    // console.log(r.data)
 
- 
-                window.renderFn.setFormDefault(r.data.options,e);
-                console.log(r.data)
+  
+                window.renderFn.setFormDefault(r.data,e);
+                // console.log(r.data,e)
 
                 r.$set(r.data.options, "formdefault", e)
 
@@ -44478,7 +44485,7 @@ module.exports = function(n) {
                 expression: "data.options.formdefault"
             }
         },
-        [r._v("设为表单默认值")])], 1)
+        [r._v("设为表单输出值")])], 1)
           , 0 <= Object.keys(r.data.options).indexOf("dataType") ? o("el-select", {
               attrs: {
                   size: "mini"
@@ -48313,33 +48320,33 @@ module.exports = function(n) {
               },
               setFormDefault:function setFormDefault(item,isTrue){
 
-                let widgetForm = this.widgetForm; 
+                let widgetForm = JSON.parse(JSON.stringify(this.widgetForm)); 
                 
-                this.widgetForm = null;
-        
+                this.widgetForm = {};
+
+                let list =  widgetForm.list
+          
                 
                 // 找到表单默认值 
          
-                widgetForm.list =  widgetForm.list.map(v=>{
-        
-                    if(isTrue  &&  v.key == item.key){
-        
-                        v.options.formdefault = isTrue; 
+                widgetForm.list =   list.map(v=>{
+ 
+                    if(  v.key === item.key ){
+                        
+                            v.options.formdefault = !v.options.formdefault
         
                     }else{
         
-                        v.options.formdefault = false;
+                        v.options.formdefault = !!v.options.formdefault;
                     }
                      
                     return v; 
                     
                 })
-        
-        
-                widgetForm.list = widgetForm.list.map(v=>v);
-         
-        
+                
                 this.widgetForm = widgetForm 
+                
+                
                 
          
         
@@ -48408,7 +48415,11 @@ module.exports = function(n) {
           watch: {
               widgetForm: {
                   deep: !0,
-                  handler: function(e) {}
+                  handler: function(e) {
+
+                      console.log('deep')
+
+                  }
               }
           }
       },
@@ -48578,7 +48589,7 @@ module.exports = function(n) {
           },
           [n._v("生成代码")]) : n._e()], 2), r("el-main", {
               class: {
-                  "widget-empty": 0 == n.widgetForm.list.length
+                  "widget-empty":  n.widgetForm.list && (0 == n.widgetForm.list.length)
               }
           },
           [n.resetJson ? n._e() : r("widget-form", {
