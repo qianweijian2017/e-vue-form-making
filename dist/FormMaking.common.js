@@ -46549,13 +46549,50 @@ module.exports = function(n) {
                   })
               },
               handleWidgetClone: function(e) {
+                 
+
+                  let options =  Object.assign({},this.data.list[e].options) ;
+
+  
                   var t = this,
+
                   n = f({},
                   this.data.list[e], {
                       options: f({},
-                      this.data.list[e].options),
-                      key: Date.parse(new Date) + "_" + Math.ceil(99999 * Math.random())
-                  });
+                      options),
+                      key: Date.parse(new Date) + "_" + Math.ceil(99999 * Math.random()) ,
+                  }); 
+ 
+                //   qwj 
+                //   key是唯一的 ，model 和 options 里的remoteFunc是不唯一的
+ 
+
+                //   解决model
+                let model =  n.model;
+                
+                let modelSplit = model.split('_');
+
+ 
+                modelSplit[1] = parseInt(modelSplit[1]) + 1+ "";;
+ 
+                n.model = modelSplit.join('_');
+
+
+                //   解决remoteFunc
+                let remoteFunc =  n.options.remoteFunc;
+
+                let remoteFuncSplit = remoteFunc.split('_');
+
+                remoteFuncSplit[1] = parseInt(remoteFuncSplit[1])+1+ "";;
+ 
+                n.options.remoteFunc = remoteFuncSplit.join('_');
+
+ 
+ 
+                //   qwj end
+
+ 
+                  
                   "radio" !== this.data.list[e].type && "checkbox" !== this.data.list[e].type || (n = f({},
                   n, {
                       options: f({},
